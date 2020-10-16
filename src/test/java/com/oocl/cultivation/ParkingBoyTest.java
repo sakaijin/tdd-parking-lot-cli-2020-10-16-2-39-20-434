@@ -80,4 +80,16 @@ class ParkingBoyTest {
 
         assertThrows(NotEnoughPosition.class, () -> parkingBoy.park(car));
     }
+
+    @Test
+    void should_return_empty_lot_parked_car_1__when_parking_boy_parks_car_given_two_lots_and_one_full() throws NotEnoughPosition {
+        Car car = new Car();
+        ParkingLot fullLot = new ParkingLot(10,10);
+        ParkingLot emptyLot = new ParkingLot(10,0);
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLotManager.assignParkingLots(parkingBoy,fullLot,emptyLot);
+        parkingBoy.checkLotsManagedForSlot(car);
+
+        assertEquals(1, emptyLot.getParkedCarCount());
+    }
 }

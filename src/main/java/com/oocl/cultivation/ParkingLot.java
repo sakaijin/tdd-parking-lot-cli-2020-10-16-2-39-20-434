@@ -6,11 +6,15 @@ import java.util.Map;
 public class ParkingLot {
     private static Map<ParkingTicket, Car> parkingTicketMap = new HashMap<>();
     private int capacity = 10;
-    private int parkedCarCount;
+    private int parkedCarCount = 0;
+
+    public int getParkedCarCount() {
+        return parkedCarCount;
+    }
 
     public ParkingLot(int lotCapacity, int parkedCards) {
         this.capacity = lotCapacity;
-        this.parkedCarCount = parkedCards;
+        this.parkedCarCount= parkedCards;
     }
 
     public ParkingLot() { }
@@ -36,5 +40,9 @@ public class ParkingLot {
 
     boolean isCapacityFull() {
         return parkedCarCount >= capacity;
+    }
+
+    void addCarCount() {
+        parkedCarCount++;
     }
 }

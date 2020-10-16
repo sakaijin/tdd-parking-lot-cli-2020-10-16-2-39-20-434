@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingBoyTest {
     @Test
-    void should_return_parking_ticket_when_parking_boy_park_car_given_car() {
+    void should_return_parking_ticket_when_parking_boy_park_car_given_car() throws NotEnoughPosition {
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
 
@@ -16,7 +16,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void should_return_right_car_ticket_when_parking_boy_fetch_car_given_ticket() throws NoTicketException, UnrecognizedParkingTicket {
+    void should_return_right_car_ticket_when_parking_boy_fetch_car_given_ticket() throws NoTicketException, UnrecognizedParkingTicket, NotEnoughPosition {
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
         ParkingTicket parkingTicket = parkingBoy.park(car);
@@ -27,7 +27,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void should_return_right_cars_when_parking_boy_fetch_cars_given_tickets() throws NoTicketException, UnrecognizedParkingTicket {
+    void should_return_right_cars_when_parking_boy_fetch_cars_given_tickets() throws NoTicketException, UnrecognizedParkingTicket, NotEnoughPosition {
         Car car1 = new Car();
         Car car2 = new Car();
         ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
@@ -42,7 +42,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void should_return_unrecognized_parking_ticket_when_parking_boy_fetch_cars_given_wrong_ticket() {
+    void should_return_unrecognized_parking_ticket_when_parking_boy_fetch_cars_given_wrong_ticket() throws NotEnoughPosition {
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
 
@@ -53,7 +53,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void should_return_no_ticket_exception__when_parking_boy_fetch_car_given_no_ticket(){
+    void should_return_no_ticket_exception__when_parking_boy_fetch_car_given_no_ticket() throws NotEnoughPosition {
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
         parkingBoy.park(car);
@@ -62,7 +62,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void should_return_unrecognized_parking_ticket_when_parking_boy_fetch_car_given_used_ticket() throws NoTicketException, UnrecognizedParkingTicket {
+    void should_return_unrecognized_parking_ticket_when_parking_boy_fetch_car_given_used_ticket() throws NoTicketException, UnrecognizedParkingTicket, NotEnoughPosition {
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
         ParkingTicket usedTicket = parkingBoy.park(car);
@@ -78,8 +78,7 @@ class ParkingBoyTest {
         ParkingLot parkingLot = new ParkingLot();
         parkingLot.setSampleCapacity(1);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-        ParkingTicket ticket = parkingBoy.park(car);
 
-        assertNull(ticket);
+        assertThrows(NotEnoughPosition.class, () -> parkingBoy.park(car));
     }
 }

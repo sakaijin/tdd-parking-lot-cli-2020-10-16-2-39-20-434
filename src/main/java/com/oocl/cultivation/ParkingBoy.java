@@ -7,8 +7,11 @@ public class ParkingBoy {
         this.parkingLot = parkingLot;
     }
 
-    public ParkingTicket park(Car car) {
-        return parkingLot.getCapacity() == 1 || parkingLot.getCapacity() > 10 ? null : ParkingLot.park(car);
+    public ParkingTicket park(Car car) throws NotEnoughPosition {
+        if (parkingLot.getCapacity() == 1 || parkingLot.getCapacity() > 10){
+            throw new NotEnoughPosition();
+        }
+        return ParkingLot.park(car);
     }
 
     public Car fetch(ParkingTicket parkingTicket) throws NoTicketException, UnrecognizedParkingTicket {

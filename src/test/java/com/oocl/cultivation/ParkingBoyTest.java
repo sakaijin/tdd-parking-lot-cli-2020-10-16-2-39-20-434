@@ -55,7 +55,10 @@ class ParkingBoyTest {
 
     @Test
     void should_return_no_car_when_parking_boy_fetch_car_given_no_ticket() {
+        Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
+        parkingBoy.park(car);
+        ParkingTicket wrongTicket = new ParkingTicket();
 
         Car fetchedCar = parkingBoy.fetch(null);
 

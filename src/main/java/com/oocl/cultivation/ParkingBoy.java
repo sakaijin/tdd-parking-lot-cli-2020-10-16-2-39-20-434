@@ -11,7 +11,7 @@ public class ParkingBoy {
         return parkingLot.getCapacity() == 1 || parkingLot.getCapacity() > 10 ? null : ParkingLot.park(car);
     }
 
-    public Car fetch(ParkingTicket parkingTicket) throws NoTicketException {
+    public Car fetch(ParkingTicket parkingTicket) throws NoTicketException, UnrecognizedParkingTicket {
         if (parkingTicket == null){
             throw new NoTicketException();
         }

@@ -21,11 +21,14 @@ public class ParkingLot {
         return parkingTicket;
     }
 
-    static Car fetch(ParkingTicket parkingTicket) {
+    static Car fetch(ParkingTicket parkingTicket) throws UnrecognizedParkingTicket {
         return getCar(parkingTicket);
     }
 
-    private static Car getCar(ParkingTicket parkingTicket) {
+    private static Car getCar(ParkingTicket parkingTicket) throws UnrecognizedParkingTicket {
+        if (!parkingTicketMap.containsKey(parkingTicket)){
+            throw new UnrecognizedParkingTicket();
+        }
         Car car = parkingTicketMap.get(parkingTicket);
         parkingTicketMap.remove(parkingTicket);
         return car;

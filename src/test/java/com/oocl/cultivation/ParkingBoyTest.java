@@ -43,9 +43,11 @@ class ParkingBoyTest {
 
     @Test
     void should_return_no_car_when_parking_boy_fetch_cars_given_wrong_ticket() {
+        Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
-        ParkingTicket wrongTicket = new ParkingTicket();
 
+        parkingBoy.park(car);
+        ParkingTicket wrongTicket = new ParkingTicket();
         Car fetchedCar = parkingBoy.fetch(wrongTicket);
 
         assertNull(fetchedCar);
@@ -76,7 +78,7 @@ class ParkingBoyTest {
     void should_return_no_parking_ticket_when_parking_boy_parks_car_given_parking_lot_capacity_full() {
         Car car = new Car();
         ParkingLot parkingLot = new ParkingLot();
-        parkingLot.capacity(1);
+        parkingLot.setSampleCapacity(1);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         ParkingTicket ticket = parkingBoy.park(car);
 

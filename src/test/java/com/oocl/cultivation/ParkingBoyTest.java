@@ -42,19 +42,18 @@ class ParkingBoyTest {
     }
 
     @Test
-    void should_return_no_car_when_parking_boy_fetch_cars_given_wrong_ticket() throws NoTicketException {
+    void should_return_unrecognized_parking_ticket_when_parking_boy_fetch_cars_given_wrong_ticket() throws NoTicketException {
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
 
         parkingBoy.park(car);
         ParkingTicket wrongTicket = new ParkingTicket();
-        Car fetchedCar = parkingBoy.fetch(wrongTicket);
 
-        assertNull(fetchedCar);
+        assertThrows(UnrecognizedParkingTicket.class, () -> parkingBoy.fetch(wrongTicket));
     }
 
     @Test
-    void should_return_no_car_when_parking_boy_fetch_car_given_no_ticket() throws NoTicketException {
+    void should_return_no_ticket_exception__when_parking_boy_fetch_car_given_no_ticket(){
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
         parkingBoy.park(car);

@@ -1,10 +1,11 @@
 package com.oocl.cultivation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ParkingBoy {
     private ParkingLot parkingLot;
-    private List<ParkingLot> assignedLots;
+    private List<ParkingLot> assignedLots = new ArrayList<>();
 
     public ParkingBoy(ParkingLot parkingLot) {
         this.parkingLot = parkingLot;
@@ -27,8 +28,8 @@ public class ParkingBoy {
         return ParkingLot.fetch(parkingTicket);
     }
 
-    void managedLots(List<ParkingLot> assignedLots) {
-        this.assignedLots = assignedLots;
+    void addLot(ParkingLot lot) {
+        this.assignedLots.add(lot);
     }
 
     public void checkLotsManagedForSlot(Car car) throws NotEnoughPosition {

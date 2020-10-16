@@ -16,7 +16,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void should_return_right_car_ticket_when_parking_boy_fetch_car_given_ticket() {
+    void should_return_right_car_ticket_when_parking_boy_fetch_car_given_ticket() throws NoTicketException {
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
         ParkingTicket parkingTicket = parkingBoy.park(car);
@@ -27,7 +27,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void should_return_right_cars_when_parking_boy_fetch_cars_given_tickets() {
+    void should_return_right_cars_when_parking_boy_fetch_cars_given_tickets() throws NoTicketException {
         Car car1 = new Car();
         Car car2 = new Car();
         ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
@@ -42,7 +42,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void should_return_no_car_when_parking_boy_fetch_cars_given_wrong_ticket() {
+    void should_return_no_car_when_parking_boy_fetch_cars_given_wrong_ticket() throws NoTicketException {
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
 
@@ -54,19 +54,16 @@ class ParkingBoyTest {
     }
 
     @Test
-    void should_return_no_car_when_parking_boy_fetch_car_given_no_ticket() {
+    void should_return_no_car_when_parking_boy_fetch_car_given_no_ticket() throws NoTicketException {
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
         parkingBoy.park(car);
-        ParkingTicket wrongTicket = new ParkingTicket();
 
-        Car fetchedCar = parkingBoy.fetch(null);
-
-        assertNull(fetchedCar);
+        assertThrows(NoTicketException.class, () -> parkingBoy.fetch(null));
     }
 
     @Test
-    void should_return_no_car_when_parking_boy_fetch_car_given_used_ticket() {
+    void should_return_no_car_when_parking_boy_fetch_car_given_used_ticket() throws NoTicketException {
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
         ParkingTicket usedTicket = parkingBoy.park(car);

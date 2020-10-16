@@ -8,7 +8,7 @@ public class ParkingBoy {
     }
 
     public ParkingTicket park(Car car) throws NotEnoughPosition {
-        if (parkingLot.getCapacity() == 1 || parkingLot.getCapacity() > 10){
+        if (parkingLot.isCapacityFull()){
             throw new NotEnoughPosition();
         }
         return ParkingLot.park(car);

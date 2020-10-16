@@ -6,14 +6,14 @@ import java.util.Map;
 public class ParkingLot {
     private static Map<ParkingTicket, Car> parkingTicketMap = new HashMap<>();
     private int capacity = 10;
+    private int parkedCarCount;
 
-    public void setSampleCapacity(int capacity) {
-        this.capacity = capacity;
+    public ParkingLot(int lotCapacity, int parkedCards) {
+        this.capacity = lotCapacity;
+        this.parkedCarCount = parkedCards;
     }
 
-    int getCapacity() {
-        return capacity;
-    }
+    public ParkingLot() { }
 
     static ParkingTicket park(Car car) {
         ParkingTicket parkingTicket = new ParkingTicket();
@@ -32,5 +32,9 @@ public class ParkingLot {
         Car car = parkingTicketMap.get(parkingTicket);
         parkingTicketMap.remove(parkingTicket);
         return car;
+    }
+
+    boolean isCapacityFull() {
+        return parkedCarCount >= capacity;
     }
 }

@@ -75,8 +75,7 @@ class ParkingBoyTest {
     @Test
     void should_return_no_parking_ticket_when_parking_boy_parks_car_given_parking_lot_capacity_full() {
         Car car = new Car();
-        ParkingLot parkingLot = new ParkingLot();
-        parkingLot.setSampleCapacity(1);
+        ParkingLot parkingLot = new ParkingLot(1,1);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
 
         assertThrows(NotEnoughPosition.class, () -> parkingBoy.park(car));

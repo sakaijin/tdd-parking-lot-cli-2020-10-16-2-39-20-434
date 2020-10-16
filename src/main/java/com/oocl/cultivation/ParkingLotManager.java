@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParkingLotManager {
-    public static List<ParkingLot> assignParkingLots(ParkingBoy parkingBoy, ParkingLot lot1, ParkingLot lot2) {
+    public static void assignParkingLot(ParkingBoy parkingBoy, ParkingLot lot) {
         List<ParkingLot> assignedLots = new ArrayList<>();
-        assignedLots.add(lot1);
-        assignedLots.add(lot2);
+        assignedLots.add(lot);
         parkingBoy.managedLots(assignedLots);
-        return assignedLots;
+    }
+
+    public static void assignParkingLot(SmartParkingBoy parkingBoy, ParkingLot lot) {
+        parkingBoy.addLot(lot);
     }
 }

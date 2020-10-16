@@ -13,6 +13,12 @@ public class ParkingLot {
     }
 
     static Car fetch(ParkingTicket parkingTicket) {
-        return parkingTicketMap.get(parkingTicket);
+        return getCar(parkingTicket);
+    }
+
+    private static Car getCar(ParkingTicket parkingTicket) {
+        Car car = parkingTicketMap.get(parkingTicket);
+        parkingTicketMap.remove(parkingTicket);
+        return car;
     }
 }

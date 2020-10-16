@@ -44,9 +44,9 @@ class ParkingBoyTest {
     @Test
     void should_return_no_car_when_parking_boy_fetch_cars_given_wrong_ticket() {
         ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
-        ParkingTicket ticket = new ParkingTicket();
+        ParkingTicket wrongTicket = new ParkingTicket();
 
-        Car fetchedCar = parkingBoy.fetch(ticket);
+        Car fetchedCar = parkingBoy.fetch(wrongTicket);
 
         assertNull(fetchedCar);
     }
@@ -70,5 +70,16 @@ class ParkingBoyTest {
         Car fetchedCar = parkingBoy.fetch(usedTicket);
 
         assertNull(fetchedCar);
+    }
+
+    @Test
+    void should_return_no_parking_ticket_when_parking_boy_parks_car_given_parking_lot_capacity_full() {
+        Car car = new Car();
+        ParkingLot parkingLot = new ParkingLot();
+        parkingLot.capacity(1);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ParkingTicket ticket = parkingBoy.park(car);
+
+        assertNull(ticket);
     }
 }

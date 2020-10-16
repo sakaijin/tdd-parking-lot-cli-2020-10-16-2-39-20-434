@@ -9,7 +9,6 @@ class ParkingBoyTest {
     void should_return_parking_ticket_when_parking_boy_park_car_given_car() {
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
-
         ParkingTicket parkingTicket = parkingBoy.park(car);
 
         assertNotNull(parkingTicket);

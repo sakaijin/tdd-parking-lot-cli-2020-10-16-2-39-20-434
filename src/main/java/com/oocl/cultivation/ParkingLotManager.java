@@ -11,7 +11,7 @@ public class ParkingLotManager extends ParkingJob{
         parkingLotManager.addLot(lot);
     }
 
-    public static ParkingTicket orderPark(ParkingJob parkingBoy, Car car) throws NotEnoughPosition {
+    public static ParkingTicket orderPark(ParkingJob parkingBoy, Car car) throws NotEnoughPosition, OperationFail {
         return parkingBoy.park(car);
     }
 

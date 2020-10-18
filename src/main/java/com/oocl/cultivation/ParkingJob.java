@@ -14,7 +14,10 @@ public class ParkingJob {
 
     public ParkingJob() { }
 
-    public ParkingTicket park(Car car) throws NotEnoughPosition {
+    public ParkingTicket park(Car car) throws NotEnoughPosition, OperationFail {
+        if (car == null){
+            throw new OperationFail();
+        }
         if (parkingLot.isCapacityFull()){
             throw new NotEnoughPosition();
         }
@@ -33,12 +36,12 @@ public class ParkingJob {
         this.assignedLots.add(lot);
     }
 
-    public void superSmartCheckLotsManagedForSlot(Car car) throws NotEnoughPosition {
+    public void superSmartCheckLotsManagedForSlot(Car car) throws NotEnoughPosition, OperationFail {
         this.parkingLot = assignedLots.stream().max(Comparator.comparing(ParkingLot::getAvailableRatio)).orElse(null);
         park(car);
     }
 
-    public void smartCheckLotsManagedForSlot(Car car) throws NotEnoughPosition {
+    public void smartCheckLotsManagedForSlot(Car car) throws NotEnoughPosition, OperationFail {
         if (Comparator.comparing(ParkingLot::getParkedCarCount).equals(assignedLots.stream())){
             checkLotsManagedForSlot(car);
         }
@@ -46,7 +49,7 @@ public class ParkingJob {
         park(car);
     }
 
-    public void checkLotsManagedForSlot(Car car) throws NotEnoughPosition {
+    public void checkLotsManagedForSlot(Car car) throws NotEnoughPosition, OperationFail {
         for (ParkingLot lot : assignedLots) {
             if (!lot.isCapacityFull()){
                 parkingLot = lot;

@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingJobTest {
     @Test
-    void should_return_parking_ticket_when_parking_boy_park_car_given_car() throws NotEnoughPosition {
+    void should_return_parking_ticket_when_parking_boy_park_car_given_car() throws NotEnoughPosition, OperationFail {
         Car car = new Car();
         ParkingJob parkingBoy = new ParkingJob(new ParkingLot());
 
@@ -16,7 +16,7 @@ class ParkingJobTest {
     }
 
     @Test
-    void should_return_right_car_ticket_when_parking_boy_fetch_car_given_ticket() throws NoTicketException, UnrecognizedParkingTicket, NotEnoughPosition {
+    void should_return_right_car_ticket_when_parking_boy_fetch_car_given_ticket() throws NoTicketException, UnrecognizedParkingTicket, NotEnoughPosition, OperationFail {
         Car car = new Car();
         ParkingJob parkingBoy = new ParkingJob(new ParkingLot());
         ParkingTicket parkingTicket = parkingBoy.park(car);
@@ -27,7 +27,7 @@ class ParkingJobTest {
     }
 
     @Test
-    void should_return_right_cars_when_parking_boy_fetch_cars_given_tickets() throws NoTicketException, UnrecognizedParkingTicket, NotEnoughPosition {
+    void should_return_right_cars_when_parking_boy_fetch_cars_given_tickets() throws NoTicketException, UnrecognizedParkingTicket, NotEnoughPosition, OperationFail {
         Car car1 = new Car();
         Car car2 = new Car();
         ParkingJob parkingBoy = new ParkingJob(new ParkingLot());
@@ -42,7 +42,7 @@ class ParkingJobTest {
     }
 
     @Test
-    void should_return_unrecognized_parking_ticket_when_parking_boy_fetch_cars_given_wrong_ticket() throws NotEnoughPosition {
+    void should_return_unrecognized_parking_ticket_when_parking_boy_fetch_cars_given_wrong_ticket() throws NotEnoughPosition, OperationFail {
         Car car = new Car();
         ParkingJob parkingBoy = new ParkingJob(new ParkingLot());
 
@@ -53,7 +53,7 @@ class ParkingJobTest {
     }
 
     @Test
-    void should_return_no_ticket_exception__when_parking_boy_fetch_car_given_no_ticket() throws NotEnoughPosition {
+    void should_return_no_ticket_exception__when_parking_boy_fetch_car_given_no_ticket() throws NotEnoughPosition, OperationFail {
         Car car = new Car();
         ParkingJob parkingBoy = new ParkingJob(new ParkingLot());
         parkingBoy.park(car);
@@ -62,7 +62,7 @@ class ParkingJobTest {
     }
 
     @Test
-    void should_return_unrecognized_parking_ticket_when_parking_boy_fetch_car_given_used_ticket() throws NoTicketException, UnrecognizedParkingTicket, NotEnoughPosition {
+    void should_return_unrecognized_parking_ticket_when_parking_boy_fetch_car_given_used_ticket() throws NoTicketException, UnrecognizedParkingTicket, NotEnoughPosition, OperationFail {
         Car car = new Car();
         ParkingJob parkingBoy = new ParkingJob(new ParkingLot());
         ParkingTicket usedTicket = parkingBoy.park(car);
@@ -82,7 +82,7 @@ class ParkingJobTest {
     }
 
     @Test
-    void should_return_empty_lot_parked_car_1__when_parking_boy_parks_car_given_two_lots_and_one_full() throws NotEnoughPosition {
+    void should_return_empty_lot_parked_car_1__when_parking_boy_parks_car_given_two_lots_and_one_full() throws NotEnoughPosition, OperationFail {
         Car car = new Car();
         ParkingLot fullLot = new ParkingLot(10,10);
         ParkingLot emptyLot = new ParkingLot(10,0);
@@ -95,7 +95,7 @@ class ParkingJobTest {
     }
 
     @Test
-    void should_return_parked_car_amount_5_when_smart_parking_boy_parks_car_given_two_lots_and_one_amount_parked_cars_are_greater() throws NotEnoughPosition {
+    void should_return_parked_car_amount_5_when_smart_parking_boy_parks_car_given_two_lots_and_one_amount_parked_cars_are_greater() throws NotEnoughPosition, OperationFail {
         Car car = new Car();
         ParkingLot lot1 = new ParkingLot(10,5);
         ParkingLot lot2 = new ParkingLot(10,4);
@@ -108,7 +108,7 @@ class ParkingJobTest {
     }
 
     @Test
-    void should_return_parked_car_amount_4_when_smart_parking_boy_parks_car_given_two_lots_and_one_amount_parked_cars_ratio_are_greater() throws NotEnoughPosition {
+    void should_return_parked_car_amount_4_when_smart_parking_boy_parks_car_given_two_lots_and_one_amount_parked_cars_ratio_are_greater() throws NotEnoughPosition, OperationFail {
         Car car = new Car();
         ParkingLot lot1 = new ParkingLot(10,5);
         ParkingLot lot2 = new ParkingLot(15,3);
@@ -121,7 +121,7 @@ class ParkingJobTest {
     }
 
     @Test
-    void should_return_parked_car_when_parking_boy_parks_car_given_two_parking_boy_manages_same_lot() throws NotEnoughPosition, UnrecognizedParkingTicket, NoTicketException {
+    void should_return_parked_car_when_parking_boy_parks_car_given_two_parking_boy_manages_same_lot() throws NotEnoughPosition, UnrecognizedParkingTicket, NoTicketException, OperationFail {
         Car car = new Car();
         ParkingLot lot = new ParkingLot(10,5);
         ParkingJob parkingBoy1 = new ParkingJob(lot);
@@ -136,7 +136,7 @@ class ParkingJobTest {
     }
 
     @Test
-    void should_return_parked_car_amount_1_when_parking_lot_manager_parks_car_given_two_lots_and_one_full() throws NotEnoughPosition {
+    void should_return_parked_car_amount_1_when_parking_lot_manager_parks_car_given_two_lots_and_one_full() throws NotEnoughPosition, OperationFail {
         Car car = new Car();
         ParkingLot fullLot = new ParkingLot(10,10);
         ParkingLot emptyLot = new ParkingLot(10,0);

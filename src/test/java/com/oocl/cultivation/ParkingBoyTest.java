@@ -106,5 +106,18 @@ class ParkingBoyTest {
 
         assertEquals(5, lot2.getParkedCarCount());
     }
+
+    @Test
+    void should_return_parked_car_amount_5asdas_when_smart_parking_boy_parks_car_given_two_lots_and_one_amount_parked_cars_are_greater() throws NotEnoughPosition {
+        Car car = new Car();
+        ParkingLot lot1 = new ParkingLot(10,5);
+        ParkingLot lot2 = new ParkingLot(15,3);
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy();
+        ParkingLotManager.assignParkingLot(superSmartParkingBoy,lot1);
+        ParkingLotManager.assignParkingLot(superSmartParkingBoy,lot2);
+        superSmartParkingBoy.superSmartCheckLotsManagedForSlot(car);
+
+        assertEquals(4, lot2.getParkedCarCount());
+    }
     
 }

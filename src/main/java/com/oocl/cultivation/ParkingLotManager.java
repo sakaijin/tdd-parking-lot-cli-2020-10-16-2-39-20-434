@@ -8,4 +8,8 @@ public class ParkingLotManager {
     public static void assignParkingLot(SmartParkingBoy parkingBoy, ParkingLot lot) {
         parkingBoy.addLot(lot);
     }
+
+    public static void assignParkingLot(SuperSmartParkingBoy parkingBoy, ParkingLot lot) {
+        parkingBoy.addLot(lot);
+    }
 }

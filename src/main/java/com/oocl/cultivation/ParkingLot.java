@@ -8,6 +8,10 @@ public class ParkingLot {
     private int capacity = 10;
     private int parkedCarCount = 0;
 
+    public int getCapacity() {
+        return capacity;
+    }
+
     public int getParkedCarCount() {
         return parkedCarCount;
     }
@@ -44,5 +48,9 @@ public class ParkingLot {
 
     void addCarCount() {
         parkedCarCount++;
+    }
+
+    double getAvailableRatio() {
+        return (float) (getCapacity() - getParkedCarCount()) / getCapacity();
     }
 }

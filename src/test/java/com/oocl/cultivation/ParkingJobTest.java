@@ -135,4 +135,17 @@ class ParkingJobTest {
         assertSame(car, orderedCar);
     }
 
+    @Test
+    void should_return_parked_car_amount_1_when_parking_lot_manager_parks_car_given_two_lots_and_one_full() throws NotEnoughPosition {
+        Car car = new Car();
+        ParkingLot fullLot = new ParkingLot(10,10);
+        ParkingLot emptyLot = new ParkingLot(10,0);
+        ParkingLotManager parkingLotManager = new ParkingLotManager();
+        ParkingLotManager.assignParkingLot(parkingLotManager,fullLot);
+        ParkingLotManager.assignParkingLot(parkingLotManager,emptyLot);
+        parkingLotManager.checkLotsManagedForSlot(car);
+
+        assertEquals(1, emptyLot.getParkedCarCount());
+    }
+
 }

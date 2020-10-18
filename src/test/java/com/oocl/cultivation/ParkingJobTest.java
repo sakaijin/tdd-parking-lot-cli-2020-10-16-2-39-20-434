@@ -119,5 +119,20 @@ class ParkingJobTest {
 
         assertEquals(4, lot2.getParkedCarCount());
     }
-    
+
+    @Test
+    void should_return_parked_car_when_parking_boy_parks_car_given_two_parking_boy_manages_same_lot() throws NotEnoughPosition, UnrecognizedParkingTicket, NoTicketException {
+        Car car = new Car();
+        ParkingLot lot = new ParkingLot(10,5);
+        ParkingJob parkingBoy1 = new ParkingJob(lot);
+        ParkingJob parkingBoy2 = new ParkingJob(lot);
+        ParkingLotManager.assignParkingLot(parkingBoy1,lot);
+        ParkingLotManager.assignParkingLot(parkingBoy2,lot);
+
+        ParkingTicket ticket = ParkingLotManager.orderPark(parkingBoy1, car);
+        Car orderedCar = ParkingLotManager.orderFetch(parkingBoy1, ticket);
+
+        assertSame(car, orderedCar);
+    }
+
 }

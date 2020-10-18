@@ -148,4 +148,10 @@ class ParkingJobTest {
         assertEquals(1, emptyLot.getParkedCarCount());
     }
 
+    @Test
+    void should_return_error_when_parking_boy_parks__car_given_no_car() {
+        ParkingJob parkingBoy = new ParkingJob(new ParkingLot());
+
+        assertThrows(OperationFail.class, () -> parkingBoy.park(null));
+    }
 }

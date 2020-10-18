@@ -8,8 +8,8 @@ public class ParkingJob {
     private ParkingLot parkingLot;
     private List<ParkingLot> assignedLots = new ArrayList<>();
 
-    public ParkingJob(ParkingLot parkingLot) {
-        this.parkingLot = parkingLot;
+    public ParkingJob(ParkingLot managedLot) {
+        this.parkingLot = managedLot;
     }
 
     public ParkingJob() { }

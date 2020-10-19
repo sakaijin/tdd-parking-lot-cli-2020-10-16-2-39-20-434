@@ -1,7 +1,6 @@
 package com.oocl.cultivation;
 
 public class ParkingLotManager extends ParkingJob{
-    public ParkingLotManager() { }
 
     public static void assignParkingLot(ParkingJob parkingBoy, ParkingLot lot) {
         parkingBoy.addLot(lot);

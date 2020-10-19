@@ -1,4 +1,4 @@
 package com.oocl.cultivation;
 
-public class CarToBeParked {
+public class Car {
 }

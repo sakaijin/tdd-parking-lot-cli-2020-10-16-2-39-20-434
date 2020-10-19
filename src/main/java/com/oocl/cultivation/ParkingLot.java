@@ -3,7 +3,7 @@ package com.oocl.cultivation;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ParkingLot {
-    private static ConcurrentHashMap<ParkingTicket, CarToBeParked> parkingTicketMap = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<ParkingTicket, Car> parkingTicketMap = new ConcurrentHashMap<>();
     private int capacity = 10;
     private int parkedCarCount = 0;
 
@@ -25,23 +25,23 @@ public class ParkingLot {
 
     public ParkingLot() { }
 
-    static ParkingTicket park(CarToBeParked carToBeParked) {
+    static ParkingTicket park(Car car) {
         ParkingTicket parkingTicket = new ParkingTicket();
-        parkingTicketMap.put(parkingTicket, carToBeParked);
+        parkingTicketMap.put(parkingTicket, car);
         return parkingTicket;
     }
 
-    static CarToBeParked fetch(ParkingTicket parkingTicket) throws UnrecognizedParkingTicket {
+    static Car fetch(ParkingTicket parkingTicket) throws UnrecognizedParkingTicket {
         return getCar(parkingTicket);
     }
 
-    private static CarToBeParked getCar(ParkingTicket parkingTicket) throws UnrecognizedParkingTicket {
+    private static Car getCar(ParkingTicket parkingTicket) throws UnrecognizedParkingTicket {
         if (!parkingTicketMap.containsKey(parkingTicket)){
             throw new UnrecognizedParkingTicket();
         }
-        CarToBeParked carToBeParked = parkingTicketMap.get(parkingTicket);
+        Car car = parkingTicketMap.get(parkingTicket);
         parkingTicketMap.remove(parkingTicket);
-        return carToBeParked;
+        return car;
     }
 
     boolean isCapacityFull() {

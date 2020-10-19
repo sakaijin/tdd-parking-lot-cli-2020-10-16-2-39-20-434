@@ -15,6 +15,10 @@ public class ParkingLot {
         return parkedCarCount;
     }
 
+    void setParkedCarCount(int parkedCarCount) {
+        this.parkedCarCount = parkedCarCount;
+    }
+
     public ParkingLot(int lotCapacity) {
         this.capacity = lotCapacity;
     }
@@ -42,10 +46,6 @@ public class ParkingLot {
 
     boolean isCapacityFull() {
         return parkedCarCount >= capacity;
-    }
-
-    void addCarCount() {
-        parkedCarCount++;
     }
 
     double getAvailableRatio() {

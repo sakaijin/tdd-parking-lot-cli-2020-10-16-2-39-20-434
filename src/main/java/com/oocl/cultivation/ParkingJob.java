@@ -21,7 +21,7 @@ public class ParkingJob {
         if (parkingLot.isCapacityFull()){
             throw new NotEnoughPosition();
         }
-        parkingLot.addCarCount();
+        addCarCount();
         return ParkingLot.park(carToBeParked);
     }
 
@@ -56,5 +56,9 @@ public class ParkingJob {
                 park(carToBeParked);
             }
         }
+    }
+
+    private void addCarCount() {
+        parkingLot.setParkedCarCount(parkingLot.getParkedCarCount() + 1);
     }
 }

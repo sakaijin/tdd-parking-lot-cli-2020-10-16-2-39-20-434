@@ -15,8 +15,8 @@ public class ParkingLotManagerTest {
         ParkingLotManager parkingLotManager = new ParkingLotManager();
         ParkingLotManager.assignParkingLot(parkingLotManager, fullLot);
         ParkingLotManager.assignParkingLot(parkingLotManager, emptyLot);
-        //WHEN
         parkingLotManager.checkLotsManagedForSlot(car1);
+        //WHEN
         parkingLotManager.checkLotsManagedForSlot(car2);
         //THEN
         assertEquals(1, emptyLot.getParkedCarCount());

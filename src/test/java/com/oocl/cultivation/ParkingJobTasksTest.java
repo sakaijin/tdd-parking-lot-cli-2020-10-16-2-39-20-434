@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ParkingJobTest {
+class ParkingJobTasksTest {
     @Test
     void should_return_parking_ticket_when_parking_boy_park_car_given_car() throws NotEnoughPosition, OperationFail {
         Car car = new Car();
-        ParkingJob parkingBoy = new ParkingJob(new ParkingLot());
+        ParkingJobTasks parkingBoy = new ParkingJobTasks(new ParkingLot());
 
         ParkingTicket parkingTicket = parkingBoy.park(car);
 
@@ -18,7 +18,7 @@ class ParkingJobTest {
     @Test
     void should_return_right_car_ticket_when_parking_boy_fetch_car_given_ticket() throws NoTicketException, UnrecognizedParkingTicket, NotEnoughPosition, OperationFail {
         Car car = new Car();
-        ParkingJob parkingBoy = new ParkingJob(new ParkingLot());
+        ParkingJobTasks parkingBoy = new ParkingJobTasks(new ParkingLot());
         ParkingTicket parkingTicket = parkingBoy.park(car);
 
         Car fetchedCar = parkingBoy.fetch(parkingTicket);
@@ -30,7 +30,7 @@ class ParkingJobTest {
     void should_return_right_cars_when_parking_boy_fetch_cars_given_tickets() throws NoTicketException, UnrecognizedParkingTicket, NotEnoughPosition, OperationFail {
         Car car1 = new Car();
         Car car2 = new Car();
-        ParkingJob parkingBoy = new ParkingJob(new ParkingLot());
+        ParkingJobTasks parkingBoy = new ParkingJobTasks(new ParkingLot());
         ParkingTicket parkingTicket1 = parkingBoy.park(car1);
         ParkingTicket parkingTicket2 = parkingBoy.park(car2);
 
@@ -44,7 +44,7 @@ class ParkingJobTest {
     @Test
     void should_return_unrecognized_parking_ticket_when_parking_boy_fetch_cars_given_wrong_ticket() throws NotEnoughPosition, OperationFail {
         Car car = new Car();
-        ParkingJob parkingBoy = new ParkingJob(new ParkingLot());
+        ParkingJobTasks parkingBoy = new ParkingJobTasks(new ParkingLot());
 
         parkingBoy.park(car);
         ParkingTicket wrongTicket = new ParkingTicket();
@@ -55,7 +55,7 @@ class ParkingJobTest {
     @Test
     void should_return_no_ticket_exception__when_parking_boy_fetch_car_given_no_ticket() throws NotEnoughPosition, OperationFail {
         Car car = new Car();
-        ParkingJob parkingBoy = new ParkingJob(new ParkingLot());
+        ParkingJobTasks parkingBoy = new ParkingJobTasks(new ParkingLot());
         parkingBoy.park(car);
 
         assertThrows(NoTicketException.class, () -> parkingBoy.fetch(null));
@@ -64,7 +64,7 @@ class ParkingJobTest {
     @Test
     void should_return_unrecognized_parking_ticket_when_parking_boy_fetch_car_given_used_ticket() throws NoTicketException, UnrecognizedParkingTicket, NotEnoughPosition, OperationFail {
         Car car = new Car();
-        ParkingJob parkingBoy = new ParkingJob(new ParkingLot());
+        ParkingJobTasks parkingBoy = new ParkingJobTasks(new ParkingLot());
         ParkingTicket usedTicket = parkingBoy.park(car);
 
         parkingBoy.fetch(usedTicket);
@@ -77,7 +77,7 @@ class ParkingJobTest {
         Car car1 = new Car();
         Car car2 = new Car();
         ParkingLot parkingLot = new ParkingLot(1);
-        ParkingJob parkingBoy = new ParkingJob(parkingLot);
+        ParkingJobTasks parkingBoy = new ParkingJobTasks(parkingLot);
         parkingBoy.park(car1);
 
         assertThrows(NotEnoughPosition.class, () -> parkingBoy.park(car2));
@@ -89,7 +89,7 @@ class ParkingJobTest {
         Car car2 = new Car();
         ParkingLot lot1 = new ParkingLot(1);
         ParkingLot lot2 = new ParkingLot(1);
-        ParkingJob parkingBoy = new ParkingJob();
+        ParkingJobTasks parkingBoy = new ParkingJobTasks();
         ParkingLotManager.assignParkingLot(parkingBoy,lot1);
         ParkingLotManager.assignParkingLot(parkingBoy,lot2);
         parkingBoy.checkLotsManagedForSlot(car1);
@@ -104,7 +104,7 @@ class ParkingJobTest {
         Car car2 = new Car();
         ParkingLot lot1 = new ParkingLot(2);
         ParkingLot lot2 = new ParkingLot(2);
-        ParkingJob smartParkingBoy = new ParkingJob();
+        ParkingJobTasks smartParkingBoy = new ParkingJobTasks();
         ParkingLotManager.assignParkingLot(smartParkingBoy,lot1);
         ParkingLotManager.assignParkingLot(smartParkingBoy,lot2);
         smartParkingBoy.smartCheckLotsManagedForSlot(car1);
@@ -119,7 +119,7 @@ class ParkingJobTest {
         Car car2 = new Car();
         ParkingLot lot1 = new ParkingLot(2);
         ParkingLot lot2 = new ParkingLot(2);
-        ParkingJob superSmartParkingBoy = new ParkingJob();
+        ParkingJobTasks superSmartParkingBoy = new ParkingJobTasks();
         ParkingLotManager.assignParkingLot(superSmartParkingBoy,lot1);
         ParkingLotManager.assignParkingLot(superSmartParkingBoy,lot2);
         superSmartParkingBoy.superSmartCheckLotsManagedForSlot(car1);
@@ -132,8 +132,8 @@ class ParkingJobTest {
     void should_return_parked_car_when_parking_boy_parks_car_given_two_parking_boy_manages_same_lot() throws NotEnoughPosition, UnrecognizedParkingTicket, NoTicketException, OperationFail {
         Car car = new Car();
         ParkingLot lot = new ParkingLot(2);
-        ParkingJob parkingBoy1 = new ParkingJob(lot);
-        ParkingJob parkingBoy2 = new ParkingJob(lot);
+        ParkingJobTasks parkingBoy1 = new ParkingJobTasks(lot);
+        ParkingJobTasks parkingBoy2 = new ParkingJobTasks(lot);
         ParkingLotManager.assignParkingLot(parkingBoy1,lot);
         ParkingLotManager.assignParkingLot(parkingBoy2,lot);
 
@@ -160,7 +160,7 @@ class ParkingJobTest {
 
     @Test
     void should_return_error_when_parking_boy_parks__car_given_no_car() {
-        ParkingJob parkingBoy = new ParkingJob(new ParkingLot());
+        ParkingJobTasks parkingBoy = new ParkingJobTasks(new ParkingLot());
 
         assertThrows(OperationFail.class, () -> parkingBoy.park(null));
     }

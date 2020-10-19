@@ -1,8 +1,8 @@
 package com.oocl.cultivation;
 
-public class ParkingLotManager extends ParkingJob{
+public class ParkingLotManager extends ParkingJobTasks {
 
-    public static void assignParkingLot(ParkingJob parkingBoy, ParkingLot lot) {
+    public static void assignParkingLot(ParkingJobTasks parkingBoy, ParkingLot lot) {
         parkingBoy.addLot(lot);
     }
 
@@ -10,11 +10,11 @@ public class ParkingLotManager extends ParkingJob{
         parkingLotManager.addLot(lot);
     }
 
-    public static ParkingTicket orderPark(ParkingJob parkingBoy, Car car) throws NotEnoughPosition, OperationFail {
+    public static ParkingTicket orderPark(ParkingJobTasks parkingBoy, Car car) throws NotEnoughPosition, OperationFail {
         return parkingBoy.park(car);
     }
 
-    public static Car orderFetch(ParkingJob parkingBoy, ParkingTicket ticket) throws UnrecognizedParkingTicket, NoTicketException {
+    public static Car orderFetch(ParkingJobTasks parkingBoy, ParkingTicket ticket) throws UnrecognizedParkingTicket, NoTicketException {
         return parkingBoy.fetch(ticket);
     }
 }

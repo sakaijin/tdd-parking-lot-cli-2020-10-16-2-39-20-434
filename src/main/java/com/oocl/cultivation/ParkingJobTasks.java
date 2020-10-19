@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class ParkingJob {
+public class ParkingJobTasks {
     private ParkingLot parkingLot;
     private List<ParkingLot> assignedLots = new ArrayList<>();
 
-    public ParkingJob(ParkingLot managedLot) {
+    public ParkingJobTasks(ParkingLot managedLot) {
         this.parkingLot = managedLot;
     }
 
-    public ParkingJob() { }
+    public ParkingJobTasks() { }
 
     public ParkingTicket park(Car car) throws NotEnoughPosition, OperationFail {
         if (car == null){

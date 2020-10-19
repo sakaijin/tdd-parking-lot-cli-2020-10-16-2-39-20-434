@@ -14,18 +14,18 @@ public class ParkingJob {
 
     public ParkingJob() { }
 
-    public ParkingTicket park(Car car) throws NotEnoughPosition, OperationFail {
-        if (car == null){
+    public ParkingTicket park(CarToBeParked carToBeParked) throws NotEnoughPosition, OperationFail {
+        if (carToBeParked == null){
             throw new OperationFail();
         }
         if (parkingLot.isCapacityFull()){
             throw new NotEnoughPosition();
         }
         parkingLot.addCarCount();
-        return ParkingLot.park(car);
+        return ParkingLot.park(carToBeParked);
     }
 
-    public Car fetch(ParkingTicket parkingTicket) throws NoTicketException, UnrecognizedParkingTicket {
+    public CarToBeParked fetch(ParkingTicket parkingTicket) throws NoTicketException, UnrecognizedParkingTicket {
         if (parkingTicket == null){
             throw new NoTicketException();
         }
@@ -36,24 +36,24 @@ public class ParkingJob {
         this.assignedLots.add(lot);
     }
 
-    public void superSmartCheckLotsManagedForSlot(Car car) throws NotEnoughPosition, OperationFail {
+    public void superSmartCheckLotsManagedForSlot(CarToBeParked carToBeParked) throws NotEnoughPosition, OperationFail {
         this.parkingLot = assignedLots.stream().max(Comparator.comparing(ParkingLot::getAvailableRatio)).orElse(null);
-        park(car);
+        park(carToBeParked);
     }
 
-    public void smartCheckLotsManagedForSlot(Car car) throws NotEnoughPosition, OperationFail {
+    public void smartCheckLotsManagedForSlot(CarToBeParked carToBeParked) throws NotEnoughPosition, OperationFail {
         if (Comparator.comparing(ParkingLot::getParkedCarCount).equals(assignedLots.stream())){
-            checkLotsManagedForSlot(car);
+            checkLotsManagedForSlot(carToBeParked);
         }
         this.parkingLot = assignedLots.stream().min(Comparator.comparing(ParkingLot::getParkedCarCount)).orElse(null);
-        park(car);
+        park(carToBeParked);
     }
 
-    public void checkLotsManagedForSlot(Car car) throws NotEnoughPosition, OperationFail {
+    public void checkLotsManagedForSlot(CarToBeParked carToBeParked) throws NotEnoughPosition, OperationFail {
         for (ParkingLot lot : assignedLots) {
             if (!lot.isCapacityFull()){
                 parkingLot = lot;
-                park(car);
+                park(carToBeParked);
             }
         }
     }

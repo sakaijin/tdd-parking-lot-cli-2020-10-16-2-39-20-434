@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ParkingLot {
-    private static Map<ParkingTicket, Car> parkingTicketMap = new HashMap<>();
+    private static Map<ParkingTicket, CarToBeParked> parkingTicketMap = new HashMap<>();
     private int capacity = 10;
     private int parkedCarCount = 0;
 
@@ -22,23 +22,23 @@ public class ParkingLot {
 
     public ParkingLot() { }
 
-    static ParkingTicket park(Car car) {
+    static ParkingTicket park(CarToBeParked carToBeParked) {
         ParkingTicket parkingTicket = new ParkingTicket();
-        parkingTicketMap.put(parkingTicket, car);
+        parkingTicketMap.put(parkingTicket, carToBeParked);
         return parkingTicket;
     }
 
-    static Car fetch(ParkingTicket parkingTicket) throws UnrecognizedParkingTicket {
+    static CarToBeParked fetch(ParkingTicket parkingTicket) throws UnrecognizedParkingTicket {
         return getCar(parkingTicket);
     }
 
-    private static Car getCar(ParkingTicket parkingTicket) throws UnrecognizedParkingTicket {
+    private static CarToBeParked getCar(ParkingTicket parkingTicket) throws UnrecognizedParkingTicket {
         if (!parkingTicketMap.containsKey(parkingTicket)){
             throw new UnrecognizedParkingTicket();
         }
-        Car car = parkingTicketMap.get(parkingTicket);
+        CarToBeParked carToBeParked = parkingTicketMap.get(parkingTicket);
         parkingTicketMap.remove(parkingTicket);
-        return car;
+        return carToBeParked;
     }
 
     boolean isCapacityFull() {

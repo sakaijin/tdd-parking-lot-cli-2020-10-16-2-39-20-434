@@ -1,10 +1,9 @@
 package com.oocl.cultivation;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ParkingLot {
-    private static Map<ParkingTicket, CarToBeParked> parkingTicketMap = new HashMap<>();
+    private static ConcurrentHashMap<ParkingTicket, CarToBeParked> parkingTicketMap = new ConcurrentHashMap<>();
     private int capacity = 10;
     private int parkedCarCount = 0;
 

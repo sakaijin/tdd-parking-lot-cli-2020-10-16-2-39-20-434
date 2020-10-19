@@ -6,6 +6,10 @@ public class ParkingLotManager extends ParkingJobTasks {
         parkingBoy.addLot(lot);
     }
 
+    public static void assignParkingLot(SmartParkingBoy smartParkingBoy, ParkingLot lot) {
+        smartParkingBoy.addLot(lot);
+    }
+
     public static void assignParkingLot(ParkingLotManager parkingLotManager, ParkingLot lot) {
         parkingLotManager.addLot(lot);
     }

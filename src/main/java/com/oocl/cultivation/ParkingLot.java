@@ -8,7 +8,7 @@ public class ParkingLot {
     private int capacity = 10;
     private int parkedCarCount = 0;
 
-    public int getCapacity() {
+    private int getCapacity() {
         return capacity;
     }
 
@@ -16,9 +16,8 @@ public class ParkingLot {
         return parkedCarCount;
     }
 
-    public ParkingLot(int lotCapacity, int parkedCards) {
+    public ParkingLot(int lotCapacity) {
         this.capacity = lotCapacity;
-        this.parkedCarCount= parkedCards;
     }
 
     public ParkingLot() { }

@@ -73,57 +73,65 @@ class ParkingJobTest {
     }
 
     @Test
-    void should_return_no_parking_ticket_when_parking_boy_parks_car_given_parking_lot_capacity_full() {
-        Car car = new Car();
-        ParkingLot parkingLot = new ParkingLot(1,1);
+    void should_return_no_parking_ticket_when_parking_boy_parks_car_given_parking_lot_capacity_full() throws NotEnoughPosition, OperationFail {
+        Car car1 = new Car();
+        Car car2 = new Car();
+        ParkingLot parkingLot = new ParkingLot(1);
         ParkingJob parkingBoy = new ParkingJob(parkingLot);
+        parkingBoy.park(car1);
 
-        assertThrows(NotEnoughPosition.class, () -> parkingBoy.park(car));
+        assertThrows(NotEnoughPosition.class, () -> parkingBoy.park(car2));
     }
 
     @Test
     void should_return_empty_lot_parked_car_1__when_parking_boy_parks_car_given_two_lots_and_one_full() throws NotEnoughPosition, OperationFail {
-        Car car = new Car();
-        ParkingLot fullLot = new ParkingLot(10,10);
-        ParkingLot emptyLot = new ParkingLot(10,0);
+        Car car1 = new Car();
+        Car car2 = new Car();
+        ParkingLot lot1 = new ParkingLot(1);
+        ParkingLot lot2 = new ParkingLot(1);
         ParkingJob parkingBoy = new ParkingJob();
-        ParkingLotManager.assignParkingLot(parkingBoy,fullLot);
-        ParkingLotManager.assignParkingLot(parkingBoy,emptyLot);
-        parkingBoy.checkLotsManagedForSlot(car);
+        ParkingLotManager.assignParkingLot(parkingBoy,lot1);
+        ParkingLotManager.assignParkingLot(parkingBoy,lot2);
+        parkingBoy.checkLotsManagedForSlot(car1);
+        parkingBoy.checkLotsManagedForSlot(car2);
 
-        assertEquals(1, emptyLot.getParkedCarCount());
+        assertEquals(1, lot2.getParkedCarCount());
     }
 
     @Test
     void should_return_parked_car_amount_5_when_smart_parking_boy_parks_car_given_two_lots_and_one_amount_parked_cars_are_greater() throws NotEnoughPosition, OperationFail {
-        Car car = new Car();
-        ParkingLot lot1 = new ParkingLot(10,5);
-        ParkingLot lot2 = new ParkingLot(10,4);
+        Car car1 = new Car();
+        Car car2 = new Car();
+        ParkingLot lot1 = new ParkingLot(2);
+        ParkingLot lot2 = new ParkingLot(2);
         ParkingJob smartParkingBoy = new ParkingJob();
         ParkingLotManager.assignParkingLot(smartParkingBoy,lot1);
         ParkingLotManager.assignParkingLot(smartParkingBoy,lot2);
-        smartParkingBoy.smartCheckLotsManagedForSlot(car);
+        smartParkingBoy.smartCheckLotsManagedForSlot(car1);
+        smartParkingBoy.smartCheckLotsManagedForSlot(car2);
 
-        assertEquals(5, lot2.getParkedCarCount());
+        assertEquals(1, lot2.getParkedCarCount());
     }
 
     @Test
     void should_return_parked_car_amount_4_when_smart_parking_boy_parks_car_given_two_lots_and_one_amount_parked_cars_ratio_are_greater() throws NotEnoughPosition, OperationFail {
-        Car car = new Car();
-        ParkingLot lot1 = new ParkingLot(10,5);
-        ParkingLot lot2 = new ParkingLot(15,3);
+        Car car1 = new Car();
+        Car car2 = new Car();
+        ParkingLot lot1 = new ParkingLot(2);
+        ParkingLot lot2 = new ParkingLot(2);
         ParkingJob superSmartParkingBoy = new ParkingJob();
         ParkingLotManager.assignParkingLot(superSmartParkingBoy,lot1);
         ParkingLotManager.assignParkingLot(superSmartParkingBoy,lot2);
-        superSmartParkingBoy.superSmartCheckLotsManagedForSlot(car);
+        superSmartParkingBoy.superSmartCheckLotsManagedForSlot(car1);
+        superSmartParkingBoy.superSmartCheckLotsManagedForSlot(car2);
 
-        assertEquals(4, lot2.getParkedCarCount());
+        assertEquals(1, lot2.getParkedCarCount());
     }
 
     @Test
     void should_return_parked_car_when_parking_boy_parks_car_given_two_parking_boy_manages_same_lot() throws NotEnoughPosition, UnrecognizedParkingTicket, NoTicketException, OperationFail {
         Car car = new Car();
-        ParkingLot lot = new ParkingLot(10,5);
+        ParkingLot lot = new ParkingLot(2);
         ParkingJob parkingBoy1 = new ParkingJob(lot);
         ParkingJob parkingBoy2 = new ParkingJob(lot);
         ParkingLotManager.assignParkingLot(parkingBoy1,lot);
@@ -137,13 +145,15 @@ class ParkingJobTest {
 
     @Test
     void should_return_parked_car_amount_1_when_parking_lot_manager_parks_car_given_two_lots_and_one_full() throws NotEnoughPosition, OperationFail {
-        Car car = new Car();
-        ParkingLot fullLot = new ParkingLot(10,10);
-        ParkingLot emptyLot = new ParkingLot(10,0);
+        Car car1 = new Car();
+        Car car2 = new Car();
+        ParkingLot fullLot = new ParkingLot(1);
+        ParkingLot emptyLot = new ParkingLot(1);
         ParkingLotManager parkingLotManager = new ParkingLotManager();
         ParkingLotManager.assignParkingLot(parkingLotManager,fullLot);
         ParkingLotManager.assignParkingLot(parkingLotManager,emptyLot);
-        parkingLotManager.checkLotsManagedForSlot(car);
+        parkingLotManager.checkLotsManagedForSlot(car1);
+        parkingLotManager.checkLotsManagedForSlot(car2);
 
         assertEquals(1, emptyLot.getParkedCarCount());
     }
